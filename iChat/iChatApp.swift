@@ -5,14 +5,30 @@
 //  Created by Diptayan Jash on 14/01/24.
 //
 
-import SwiftUI
 import Firebase
+import FirebaseStorage
+import SwiftUI
+
+class FirebaseManager: NSObject {
+    let auth: Auth
+    let storage: Storage
+    let firestore: Firestore
+
+    static let shared = FirebaseManager()
+
+    override init() {
+        FirebaseApp.configure()
+
+        auth = Auth.auth()
+        storage = Storage.storage()
+        firestore = Firestore.firestore()
+
+        super.init()
+    }
+}
+
 @main
 struct iChatApp: App {
-    init(){
-        FirebaseApp.configure()
-    }
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
