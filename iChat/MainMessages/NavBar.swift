@@ -1,22 +1,24 @@
-//
-//  NavBar.swift
-//  iChat
-//
-//  Created by Diptayan Jash on 15/01/24.
-//
-
 import Foundation
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct NavBar: View {
+    @ObservedObject private var vm = GetUserData()
+    @Binding var username: String
+    @Binding var profilePicture: String
     @Binding var ShowLogOutOptions: Bool
+
     var body: some View {
         HStack(spacing: 16) {
-            Image(systemName: "person.fill")
-                .font(.system(size: 34, weight: .heavy))
+            WebImage(url: URL(string: profilePicture))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .clipped()
+                .cornerRadius(50)
                 .accessibilityLabel("Profile Image")
             VStack(alignment: .leading, spacing: 4) {
-                Text("username")
+                Text(vm.username)
                     .font(.system(size: 20, weight: .bold))
                 HStack {
                     Circle()
@@ -38,12 +40,12 @@ struct NavBar: View {
         }
         .padding(.horizontal)
         .padding(.bottom, 10)
-        .actionSheet(isPresented: $ShowLogOutOptions){
+        .actionSheet(isPresented: $ShowLogOutOptions) {
             .init(title: Text("Settings"), message: Text("What do you want to do"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     print("Signing Out")
                 }),
-                .cancel()
+                .cancel(),
             ])
         }
     }
