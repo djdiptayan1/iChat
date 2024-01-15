@@ -12,11 +12,15 @@ struct NavBar: View {
         HStack(spacing: 16) {
             WebImage(url: URL(string: profilePicture))
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(width: 50, height: 50)
                 .clipped()
                 .cornerRadius(50)
                 .accessibilityLabel("Profile Image")
+                .overlay(
+                    RoundedRectangle(cornerRadius: 44)
+                        .stroke(Color(.label), lineWidth: 1)
+                )
             VStack(alignment: .leading, spacing: 4) {
                 Text(vm.username)
                     .font(.system(size: 20, weight: .bold))
@@ -44,9 +48,16 @@ struct NavBar: View {
             .init(title: Text("Settings"), message: Text("What do you want to do"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     print("Signing Out")
+                    vm.handleSignOut()
                 }),
                 .cancel(),
             ])
+        }
+        .fullScreenCover(isPresented: $vm.isLoggedOut, onDismiss: nil){
+            Welcomepage(didCompleteLogin: {
+                self.vm.isLoggedOut = false
+                self.vm.fetchCurrentUser()
+            })
         }
     }
 }

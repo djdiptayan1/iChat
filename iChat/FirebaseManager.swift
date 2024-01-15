@@ -17,10 +17,11 @@ class GetUserData: ObservableObject {
     @Published var ProfilePic = ""
     
     init() {
+        isLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
         fetchCurrentUser()
     }
 
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
         guard let
             email = FirebaseManager.shared.auth.currentUser?.email else {
             errorMessage = "FAILED TO FETCH USER"
@@ -48,6 +49,13 @@ class GetUserData: ObservableObject {
                 self.uid = chatuser.uid
                 self.ProfilePic = chatuser.ProfilePic
             }
+    }
+    
+    @Published var isLoggedOut = false
+    
+    func handleSignOut(){
+        isLoggedOut.toggle()
+        try? FirebaseManager.shared.auth.signOut()
     }
 }
 

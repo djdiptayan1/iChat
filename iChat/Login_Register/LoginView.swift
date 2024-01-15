@@ -1,26 +1,21 @@
-//
-//  LoginView.swift
-//  iChat
-//
-//  Created by Diptayan Jash on 15/01/24.
-//
-
 import Firebase
 import Foundation
 import SwiftUI
 
 struct LoginView: View {
     let generator = UIImpactFeedbackGenerator(style: .medium)
-
+//    let didCompleteLogin: () -> ()
+    var didCompleteLogin: () -> Void
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String = ""
-    @State private var isPasswordVisible: Bool = false
 
     var body: some View {
+        
         VStack {
-            TextField("Username", text: $email)
-                .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+            TextField("Email", text: $email)
+                .autocapitalization(.none)
+                .keyboardType(.emailAddress)
                 .padding()
                 .background(.gray.opacity(0.1))
                 .cornerRadius(5)
@@ -66,6 +61,7 @@ struct LoginView: View {
             }
             print("SUCCESSFULLY LOGIN \(result?.user.uid ?? "")")
             self.errorMessage = "Successfully Logged In: \(result?.user.uid ?? "")"
+            didCompleteLogin()
         }
     }
 }

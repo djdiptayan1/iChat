@@ -31,7 +31,7 @@ class FirebaseManager: NSObject {
 struct iChatApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Welcomepage(didCompleteLogin: {})
         }
     }
 }

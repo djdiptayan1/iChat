@@ -11,6 +11,7 @@ import Foundation
 import SwiftUI
 
 struct RegisterView: View {
+    var didCompleteLogin: () -> Void
     let generator = UIImpactFeedbackGenerator(style: .medium)
 
     @State private var name: String = ""
@@ -95,6 +96,10 @@ struct RegisterView: View {
     }
 
     func registerUser() {
+        if self.selectedImage == nil {
+            self.errorMessage = "select Profile Picture"
+            return
+        }
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
             result, err in
             if let err = err {
@@ -156,5 +161,6 @@ struct RegisterView: View {
                 self.errorMessage = "\(String(describing: err))"
             }
         print("SUCCESS")
+        didCompleteLogin()
     }
 }
