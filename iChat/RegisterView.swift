@@ -59,6 +59,7 @@ struct RegisterView: View {
                 .padding()
                 .background(.gray.opacity(0.1))
                 .cornerRadius(5)
+            
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
@@ -82,19 +83,21 @@ struct RegisterView: View {
                         }
                     }
             )
-            Text(self.errorMessage)
-                .foregroundColor(.red)
         }
         .padding()
     }
 
     func registerUser() {
-        print("Create Acc")
-        Auth.auth().createUser(withEmail: email, password: password) {
+        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
             result, err in
             if let err = err {
-                print("FAILED", err)
-                self.errorMessage = "Failed to Create User: \(err)"
+                let authError = err as NSError
+                if authError.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+                    self.errorMessage = "Account already in use. Please use a different email or login."
+                } else {
+                    self.errorMessage = "Failed to Create User: \(err.localizedDescription)"
+                    print(err.localizedDescription)
+                }
                 return
             }
             print("SUCCESSFULLY CREATED \(result?.user.uid ?? "")")
@@ -105,9 +108,9 @@ struct RegisterView: View {
     }
 
     private func saveImgtoFirebase() {
-        guard let uid = Auth.auth().currentUser?.uid, let imageData = selectedImage?.jpegData(compressionQuality: 0.5) else { return }
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid, let imageData = selectedImage?.jpegData(compressionQuality: 0.5) else { return }
 
-        let ref = Storage.storage().reference(withPath: uid)
+        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
 
@@ -126,10 +129,25 @@ struct RegisterView: View {
                         DispatchQueue.main.async {
                             self.errorMessage = "Successfully stored image with URL: \(downloadURL)"
                             print(downloadURL)
+                            guard let url = url else { return }
+                            self.StoreUserInfo(imageProfile: url)
                         }
                     }
                 }
             }
         }
+    }
+
+    private func StoreUserInfo(imageProfile: URL) {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            return
+        }
+        let userData = ["email": email, "uid": uid, "ProfilePic": imageProfile.absoluteString]
+        FirebaseManager.shared.firestore.collection("users")
+            .document(email).setData(userData) { err in
+                print(err ?? "SUCCESS")
+                self.errorMessage = "\(String(describing: err))"
+            }
+        print("SUCCESS")
     }
 }
