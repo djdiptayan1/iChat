@@ -13,6 +13,7 @@ import SwiftUI
 struct RegisterView: View {
     let generator = UIImpactFeedbackGenerator(style: .medium)
 
+    @State private var name: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
@@ -44,8 +45,14 @@ struct RegisterView: View {
                 ImagePicker(image: $selectedImage, showImagePicker: $shouldShowImagePicker, sourceType: .photoLibrary)
             }
 
-            TextField("Username", text: $email)
+            TextField("Name", text: $name)
                 .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                .padding()
+                .background(.gray.opacity(0.1))
+                .cornerRadius(5)
+            TextField("Email", text: $email)
+                .autocapitalization(/*@START_MENU_TOKEN@*/ .none/*@END_MENU_TOKEN@*/)
+                .keyboardType(.emailAddress)
                 .padding()
                 .background(.gray.opacity(0.1))
                 .cornerRadius(5)
@@ -142,7 +149,7 @@ struct RegisterView: View {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
-        let userData = ["email": email, "uid": uid, "ProfilePic": imageProfile.absoluteString]
+        let userData = ["name": name, "email": email, "uid": uid, "ProfilePic": imageProfile.absoluteString]
         FirebaseManager.shared.firestore.collection("users")
             .document(email).setData(userData) { err in
                 print(err ?? "SUCCESS")

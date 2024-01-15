@@ -1,13 +1,16 @@
+import Firebase
 import SwiftUI
+import SDWebImageSwiftUI
+
 struct MainMessageView: View {
-    
     @State var ShowLogOutOptions = false
-    
+    @ObservedObject private var vm = GetUserData()
+
     var body: some View {
         NavigationView {
             VStack {
                 // Navbar
-                NavBar(ShowLogOutOptions: $ShowLogOutOptions)
+                NavBar(username: $vm.username, profilePicture: $vm.ProfilePic, ShowLogOutOptions: $ShowLogOutOptions)
                 ScrollView {
                     ForEach(0 ..< 10, id: \.self) { _ in
                         HStack(spacing: 16) {
@@ -19,9 +22,8 @@ struct MainMessageView: View {
                                     RoundedRectangle(cornerRadius: 44)
                                         .stroke(Color(.label), lineWidth: 1)
                                 )
-
                             VStack(alignment: .leading) {
-                                Text("username")
+                                Text("Username")
                                     .font(.system(size: 14, weight: .bold))
                                 Text("msg sent")
                                     .font(.system(size: 14))
@@ -65,6 +67,5 @@ struct NewMsgButton: View {
             .padding(.horizontal)
             .shadow(radius: 15)
         }
-        
     }
 }
