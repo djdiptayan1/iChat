@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3457382B570ECF003D7F16 /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3457372B570ECF003D7F16 /* ChatLogViewModel.swift */; };
 		9D3C5EC52B555A8C00679EC2 /* CreateNewMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */; };
 		9D3C5EC72B55608900679EC2 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC62B55608900679EC2 /* ChatUser.swift */; };
 		9D3C5ECA2B55AC2E00679EC2 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D3457372B570ECF003D7F16 /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 		9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMsg.swift; sourceTree = "<group>"; };
 		9D3C5EC62B55608900679EC2 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		9D3C5ECE2B55AE2B00679EC2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9D3457372B570ECF003D7F16 /* ChatLogViewModel.swift */,
 				9DC06F042B54FE1400EB6352 /* FirebaseManager.swift */,
 				9D3C5EC62B55608900679EC2 /* ChatUser.swift */,
 			);
@@ -368,6 +371,7 @@
 				9D3C5ED02B55AEB700679EC2 /* messagesView.swift in Sources */,
 				9DADA7CC2B54829100F3FB17 /* ImagePicker.swift in Sources */,
 				9DADA7C32B54639100F3FB17 /* LoginView.swift in Sources */,
+				9D3457382B570ECF003D7F16 /* ChatLogViewModel.swift in Sources */,
 				9DC06F052B54FE1400EB6352 /* FirebaseManager.swift in Sources */,
 				9DADA7962B545F0600F3FB17 /* iChatApp.swift in Sources */,
 			);
