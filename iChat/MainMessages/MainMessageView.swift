@@ -63,32 +63,6 @@ struct MainMessagesView: View {
         }
         .foregroundColor(Color(.label))
     }
-    
-//    private var newMessageButton: some View {
-//        Button {
-//            shouldShowNewMessageScreen.toggle()
-//        } label: {
-//            HStack {
-//                Spacer()
-//                Text("+ New Message")
-//                    .font(.system(size: 16, weight: .bold))
-//                Spacer()
-//            }
-//            .foregroundColor(.white)
-//            .padding(.vertical)
-//                .background(Color.blue)
-//                .cornerRadius(32)
-//                .padding(.horizontal)
-//                .shadow(radius: 15)
-//        }
-//        .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
-//            CreateNewMsg(didSelectUser: { user in
-//                print(user.email)
-//                self.shouldNavigateToChatLogView.toggle()
-//                self.chatUser = user
-//            })
-//        }
-//    }
 }
 
 struct MainMessagesView_Previews: PreviewProvider {
