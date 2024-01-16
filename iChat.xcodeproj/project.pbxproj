@@ -144,7 +144,6 @@
 		9DADA7892B545F0600F3FB17 = {
 			isa = PBXGroup;
 			children = (
-				9D3C5ECF2B55AEB700679EC2 /* messagesView.swift */,
 				9DADA7942B545F0600F3FB17 /* iChat */,
 				9DADA7A62B545F0700F3FB17 /* iChatTests */,
 				9DADA7B02B545F0700F3FB17 /* iChatUITests */,
@@ -167,7 +166,6 @@
 			children = (
 				9D3C5ECE2B55AE2B00679EC2 /* Utils */,
 				9D3C5ECD2B55ADD000679EC2 /* Buttons */,
-				9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */,
 				9D4599222B5554DB001B9973 /* Login_Register */,
 				9DC06F062B5504EE00EB6352 /* MainMessages */,
 				9DADA7952B545F0600F3FB17 /* iChatApp.swift */,
@@ -208,6 +206,8 @@
 		9DC06F062B5504EE00EB6352 /* MainMessages */ = {
 			isa = PBXGroup;
 			children = (
+				9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */,
+				9D3C5ECF2B55AEB700679EC2 /* messagesView.swift */,
 				9D3C5EC82B55AC1600679EC2 /* Chat */,
 				9DC06F072B55050500EB6352 /* MainMessageView.swift */,
 				9DC06F092B55140500EB6352 /* NavBar.swift */,
