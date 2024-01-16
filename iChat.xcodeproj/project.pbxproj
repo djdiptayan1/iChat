@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3C5EC52B555A8C00679EC2 /* CreateNewMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */; };
+		9D3C5EC72B55608900679EC2 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC62B55608900679EC2 /* ChatUser.swift */; };
+		9D3C5ECA2B55AC2E00679EC2 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */; };
+		9D3C5ECC2B55ADAC00679EC2 /* NewMsgButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5ECB2B55ADAC00679EC2 /* NewMsgButton.swift */; };
+		9D3C5ED02B55AEB700679EC2 /* messagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5ECF2B55AEB700679EC2 /* messagesView.swift */; };
 		9DADA7962B545F0600F3FB17 /* iChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7952B545F0600F3FB17 /* iChatApp.swift */; };
 		9DADA7982B545F0600F3FB17 /* Welcomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7972B545F0600F3FB17 /* Welcomepage.swift */; };
 		9DADA79A2B545F0700F3FB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DADA7992B545F0700F3FB17 /* Assets.xcassets */; };
@@ -46,6 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMsg.swift; sourceTree = "<group>"; };
+		9D3C5EC62B55608900679EC2 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		9D3C5ECB2B55ADAC00679EC2 /* NewMsgButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMsgButton.swift; sourceTree = "<group>"; };
+		9D3C5ECF2B55AEB700679EC2 /* messagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messagesView.swift; sourceTree = "<group>"; };
 		9DADA7922B545F0600F3FB17 /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DADA7952B545F0600F3FB17 /* iChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iChatApp.swift; sourceTree = "<group>"; };
 		9DADA7972B545F0600F3FB17 /* Welcomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcomepage.swift; sourceTree = "<group>"; };
@@ -96,6 +106,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3C5EC82B55AC1600679EC2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		9D3C5ECD2B55ADD000679EC2 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				9DADA7CB2B54829100F3FB17 /* ImagePicker.swift */,
+				9D3C5ECB2B55ADAC00679EC2 /* NewMsgButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		9D3C5ECE2B55AE2B00679EC2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9DC06F042B54FE1400EB6352 /* FirebaseManager.swift */,
+				9D3C5EC62B55608900679EC2 /* ChatUser.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		9D4599222B5554DB001B9973 /* Login_Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +144,7 @@
 		9DADA7892B545F0600F3FB17 = {
 			isa = PBXGroup;
 			children = (
+				9D3C5ECF2B55AEB700679EC2 /* messagesView.swift */,
 				9DADA7942B545F0600F3FB17 /* iChat */,
 				9DADA7A62B545F0700F3FB17 /* iChatTests */,
 				9DADA7B02B545F0700F3FB17 /* iChatUITests */,
@@ -128,12 +165,13 @@
 		9DADA7942B545F0600F3FB17 /* iChat */ = {
 			isa = PBXGroup;
 			children = (
+				9D3C5ECE2B55AE2B00679EC2 /* Utils */,
+				9D3C5ECD2B55ADD000679EC2 /* Buttons */,
+				9D3C5EC42B555A8C00679EC2 /* CreateNewMsg.swift */,
 				9D4599222B5554DB001B9973 /* Login_Register */,
 				9DC06F062B5504EE00EB6352 /* MainMessages */,
 				9DADA7952B545F0600F3FB17 /* iChatApp.swift */,
 				9DADA7972B545F0600F3FB17 /* Welcomepage.swift */,
-				9DADA7CB2B54829100F3FB17 /* ImagePicker.swift */,
-				9DC06F042B54FE1400EB6352 /* FirebaseManager.swift */,
 				9DADA7992B545F0700F3FB17 /* Assets.xcassets */,
 				9DADA79B2B545F0700F3FB17 /* iChat.entitlements */,
 				9DADA7C42B54740700F3FB17 /* GoogleService-Info.plist */,
@@ -170,6 +208,7 @@
 		9DC06F062B5504EE00EB6352 /* MainMessages */ = {
 			isa = PBXGroup;
 			children = (
+				9D3C5EC82B55AC1600679EC2 /* Chat */,
 				9DC06F072B55050500EB6352 /* MainMessageView.swift */,
 				9DC06F092B55140500EB6352 /* NavBar.swift */,
 			);
@@ -320,8 +359,13 @@
 			files = (
 				9DADA7C12B54634B00F3FB17 /* RegisterView.swift in Sources */,
 				9DC06F0A2B55140500EB6352 /* NavBar.swift in Sources */,
+				9D3C5ECC2B55ADAC00679EC2 /* NewMsgButton.swift in Sources */,
+				9D3C5ECA2B55AC2E00679EC2 /* ChatLogView.swift in Sources */,
+				9D3C5EC52B555A8C00679EC2 /* CreateNewMsg.swift in Sources */,
 				9DADA7982B545F0600F3FB17 /* Welcomepage.swift in Sources */,
+				9D3C5EC72B55608900679EC2 /* ChatUser.swift in Sources */,
 				9DC06F082B55050500EB6352 /* MainMessageView.swift in Sources */,
+				9D3C5ED02B55AEB700679EC2 /* messagesView.swift in Sources */,
 				9DADA7CC2B54829100F3FB17 /* ImagePicker.swift in Sources */,
 				9DADA7C32B54639100F3FB17 /* LoginView.swift in Sources */,
 				9DC06F052B54FE1400EB6352 /* FirebaseManager.swift in Sources */,

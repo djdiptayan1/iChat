@@ -1,62 +1,67 @@
-import Foundation
-import SDWebImageSwiftUI
-import SwiftUI
+// CustomNavBarView.swift
 
-struct NavBar: View {
-    @ObservedObject private var vm = GetUserData()
-    @Binding var username: String
-    @Binding var profilePicture: String
-    @Binding var ShowLogOutOptions: Bool
+import SwiftUI
+import SDWebImageSwiftUI
+
+struct Navbar: View {
+    @ObservedObject private var vm: GetUserData
+    
+    init(vm: GetUserData) {
+        self.vm = vm
+    }
 
     var body: some View {
         HStack(spacing: 16) {
-            WebImage(url: URL(string: profilePicture))
+            WebImage(url: URL(string: vm.chatUser?.ProfilePic ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 50, height: 50)
                 .clipped()
                 .cornerRadius(50)
-                .accessibilityLabel("Profile Image")
-                .overlay(
-                    RoundedRectangle(cornerRadius: 44)
-                        .stroke(Color(.label), lineWidth: 1)
+                .overlay(RoundedRectangle(cornerRadius: 44)
+                            .stroke(Color(.label), lineWidth: 1)
                 )
+                .shadow(radius: 5)
+
             VStack(alignment: .leading, spacing: 4) {
-                Text(vm.username)
-                    .font(.system(size: 20, weight: .bold))
+                let user = vm.chatUser?.username ?? "null"
+                Text(user)
+                    .font(.system(size: 24, weight: .bold))
+
                 HStack {
                     Circle()
-                        .foregroundStyle(.green)
+                        .foregroundColor(.green)
                         .frame(width: 14, height: 14)
-                    Text("Online")
+                    Text("online")
                         .font(.system(size: 12))
                         .foregroundColor(Color(.lightGray))
                 }
             }
+
             Spacer()
+
             Button {
-                ShowLogOutOptions.toggle()
+                vm.shouldShowLogOutOptions.toggle()
             } label: {
                 Image(systemName: "gear")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(Color(.label))
+                    .foregroundColor(Color(.label))
             }
         }
-        .padding(.horizontal)
-        .padding(.bottom, 10)
-        .actionSheet(isPresented: $ShowLogOutOptions) {
-            .init(title: Text("Settings"), message: Text("What do you want to do"), buttons: [
+        .padding()
+        .actionSheet(isPresented: $vm.shouldShowLogOutOptions) {
+            ActionSheet(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
                 .destructive(Text("Sign Out"), action: {
-                    print("Signing Out")
+                    print("handle sign out")
                     vm.handleSignOut()
                 }),
-                .cancel(),
+                .cancel()
             ])
         }
-        .fullScreenCover(isPresented: $vm.isLoggedOut, onDismiss: nil){
+        .fullScreenCover(isPresented: $vm.isLoggedOut, onDismiss: nil) {
             Welcomepage(didCompleteLogin: {
-                self.vm.isLoggedOut = false
-                self.vm.fetchCurrentUser()
+                vm.isLoggedOut = false
+                vm.fetchCurrentUser()
             })
         }
     }

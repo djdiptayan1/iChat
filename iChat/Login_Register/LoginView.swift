@@ -11,7 +11,6 @@ struct LoginView: View {
     @State private var errorMessage: String = ""
 
     var body: some View {
-        
         VStack {
             TextField("Email", text: $email)
                 .autocapitalization(.none)
@@ -56,12 +55,12 @@ struct LoginView: View {
             result, err in
             if let err = err {
                 print("Error While Login", err)
-                self.errorMessage = "Failed to Create User: \(err)"
+                self.errorMessage = "Failed to Login"
                 return
             }
             print("SUCCESSFULLY LOGIN \(result?.user.uid ?? "")")
             self.errorMessage = "Successfully Logged In: \(result?.user.uid ?? "")"
-            didCompleteLogin()
+            self.didCompleteLogin()
         }
     }
 }

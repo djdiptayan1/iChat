@@ -32,16 +32,13 @@ struct Welcomepage: View {
                         self.isShowingMainMessageView = true
                     })
                 } else {
-                    RegisterView(didCompleteLogin: {
-                        vm.isLoggedOut = false
-                        self.isShowingMainMessageView = true
-                    })
+                    RegisterView()
                 }
             }
             .navigationTitle(isLogin ? "Login" : "Create Account")
             .navigationViewStyle(StackNavigationViewStyle())
             .fullScreenCover(isPresented: $isShowingMainMessageView) {
-                MainMessageView()
+                MainMessagesView()
             }
         }
     }

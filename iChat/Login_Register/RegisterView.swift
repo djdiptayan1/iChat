@@ -11,9 +11,7 @@ import Foundation
 import SwiftUI
 
 struct RegisterView: View {
-    var didCompleteLogin: () -> Void
     let generator = UIImpactFeedbackGenerator(style: .medium)
-
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
@@ -161,6 +159,5 @@ struct RegisterView: View {
                 self.errorMessage = "\(String(describing: err))"
             }
         print("SUCCESS")
-        didCompleteLogin()
     }
 }

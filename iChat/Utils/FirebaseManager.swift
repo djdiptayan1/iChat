@@ -4,56 +4,62 @@ import SwiftUI
 
 import Firebase
 
-struct ChatUser {
-    let username, email, uid: String
-    let ProfilePic: String
+class FirebaseManager: NSObject {
+    let auth: Auth
+    let storage: Storage
+    let firestore: Firestore
+
+    static let shared = FirebaseManager()
+
+    override init() {
+        FirebaseApp.configure()
+
+        auth = Auth.auth()
+        storage = Storage.storage()
+        firestore = Firestore.firestore()
+
+        super.init()
+    }
 }
 
 class GetUserData: ObservableObject {
     @Published var errorMessage = ""
-    @Published var username = ""
-    @Published var email = ""
-    @Published var uid = ""
-    @Published var ProfilePic = ""
-    
+    @Published var chatUser: ChatUser?
+    @Published var isLoggedOut = false
+    @Published var shouldShowLogOutOptions = false
+    @Published var shouldNavigateToChatLogView = false
+
     init() {
-        isLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+        DispatchQueue.main.async {
+            self.isLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+        }
         fetchCurrentUser()
     }
 
     func fetchCurrentUser() {
-        guard let
-            email = FirebaseManager.shared.auth.currentUser?.email else {
-            errorMessage = "FAILED TO FETCH USER"
+        guard let email = FirebaseManager.shared.auth.currentUser?.email else {
+            self.errorMessage = "Could not find firebase email"
             return
         }
-        FirebaseManager.shared.firestore.collection("users")
-            .document(email).getDocument { snapshot, error in
-                if let error = error {
-                    self.errorMessage = "FAILED TO FETCH USER"
-                    print("FAILED TO FETCH USER", error)
-                    return
-                }
-                guard let data = snapshot?.data() else { return }
-                print(data)
-
-                let username = data["name"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let uid = data["uid"] as? String ?? ""
-                let ProfilePic = data["ProfilePic"] as? String ?? ""
-
-                let chatuser = ChatUser(username: username, email: email, uid: uid, ProfilePic: ProfilePic)
-
-                self.username = chatuser.username
-                self.email = chatuser.email
-                self.uid = chatuser.uid
-                self.ProfilePic = chatuser.ProfilePic
+        
+        FirebaseManager.shared.firestore.collection("users").document(email).getDocument { snapshot, error in
+            if let error = error {
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                print("Failed to fetch current user:", error)
+                return
             }
+            
+            guard let data = snapshot?.data() else {
+                self.errorMessage = "No data found"
+                return
+                
+            }
+            
+            self.chatUser = .init(data: data)
+        }
     }
-    
-    @Published var isLoggedOut = false
-    
-    func handleSignOut(){
+
+    func handleSignOut() {
         isLoggedOut.toggle()
         try? FirebaseManager.shared.auth.signOut()
     }
