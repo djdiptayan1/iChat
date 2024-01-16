@@ -57,6 +57,9 @@ class ChatLogViewModel: ObservableObject {
                         self.chatMessages.append(.init(documentID: change.document.documentID, data: data))
                     }
                 })
+                DispatchQueue.main.async{
+                    self.count+=1
+                }
             }
     }
 
@@ -81,6 +84,7 @@ class ChatLogViewModel: ObservableObject {
             }
             print("sender Successfull saved msg")
 //            self.chatText = ""
+//            self.count+=1
         }
         let recipientMsgDocument = FirebaseManager.shared.firestore
             .collection("messages")
@@ -97,4 +101,6 @@ class ChatLogViewModel: ObservableObject {
             print("recipient Successfull saved msg too")
         }
     }
+    
+    @Published var count = 0
 }

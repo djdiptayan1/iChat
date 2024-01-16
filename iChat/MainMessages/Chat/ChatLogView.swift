@@ -1,7 +1,6 @@
 import Firebase
 import SwiftUI
 
-
 struct ChatLogView: View {
     let chatUser: ChatUser?
 
@@ -25,43 +24,26 @@ struct ChatLogView: View {
         .foregroundStyle(Color(.label))
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    static let emptyScrollToString = "Empty"
 
     private var messagesView: some View {
         ScrollView {
-            ForEach(vm.chatMessages){ message in
+            ScrollViewReader { scrollViewProxy in
                 VStack {
-                    if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
-                        HStack {
-                            Spacer()
-                            HStack {
-                                Text(message.text)
-                                    .foregroundColor(.white)
-                                    .id(message.id)
-                            }
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(8)
-                        }
-                    } else {
-                        HStack {
-                            HStack {
-                                Text(message.text)
-                                    .foregroundColor(.white)
-                                    .id(message.id)
-                            }
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(8)
-                            Spacer()
-                        }
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 8)
+                    ForEach(vm.chatMessages) { message in
 
+                        MessageView(message: message)
+                    }
+                    HStack { Spacer() }
+                        .frame(height: 50)
+                        .id(Self.emptyScrollToString)
+                        .onReceive(vm.$count) { _ in
+//                            withAnimation(.easeOut(duration: 0.5)) // IF I use animation, I cannot change the background. Weird bug need to fix it.
+                            scrollViewProxy.scrollTo(Self.emptyScrollToString, anchor: .bottom)
+                        }
+                }
             }
-            HStack { Spacer() }
-                .frame(height: 50)
         }
         .background(Color(.systemGroupedBackground))
     }
@@ -81,6 +63,7 @@ struct ChatLogView: View {
             Button {
                 vm.handleSend()
                 vm.chatText = ""
+                vm.count+=1
             } label: {
                 Text("Send")
                     .fontWeight(.bold)
@@ -110,6 +93,41 @@ private struct DescriptionPlaceholder: View {
     }
 }
 
-#Preview{
+#Preview {
     MainMessagesView()
+}
+
+struct MessageView: View {
+    let message: ChatMessage
+    var body: some View {
+        VStack {
+            if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
+                HStack {
+                    Spacer()
+                    HStack {
+                        Text(message.text)
+                            .foregroundColor(.white)
+                            .id(message.id)
+                    }
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(8)
+                }
+            } else {
+                HStack {
+                    HStack {
+                        Text(message.text)
+                            .foregroundColor(.white)
+                            .id(message.id)
+                    }
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(8)
+                    Spacer()
+                }
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
+    }
 }
