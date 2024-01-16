@@ -1,31 +1,38 @@
+import Firebase
 import SwiftUI
 
+
 struct ChatLogView: View {
-    
     let chatUser: ChatUser?
-    
-    @State var chatText = ""
-    
+
+    init(chatUser: ChatUser?) {
+        self.chatUser = chatUser
+        vm = .init(chatUser: chatUser)
+    }
+
+    @ObservedObject var vm: ChatLogViewModel
+
     var body: some View {
         ZStack {
             messagesView
             VStack(spacing: 0) {
                 Spacer()
                 chatBottomBar
-                    .background(Color.white.ignoresSafeArea())
+                    .background(Color(.systemGroupedBackground).ignoresSafeArea())
             }
         }
         .navigationTitle(chatUser?.username ?? "")
-            .navigationBarTitleDisplayMode(.inline)
+        .foregroundStyle(Color(.label))
+        .navigationBarTitleDisplayMode(.inline)
     }
-    
+
     private var messagesView: some View {
         ScrollView {
-            ForEach(0..<20) { num in
+            ForEach(vm.chatMessages){ message in
                 HStack {
                     Spacer()
                     HStack {
-                        Text("FAKE MESSAGE FOR NOW")
+                        Text(message.text)
                             .foregroundColor(.white)
                     }
                     .padding()
@@ -35,14 +42,12 @@ struct ChatLogView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
             }
-            
-            HStack{ Spacer() }
-            .frame(height: 50)
+            HStack { Spacer() }
+                .frame(height: 50)
         }
-        .background(Color(.init(white: 0.95, alpha: 1)))
-                    
+        .background(Color(.systemGroupedBackground))
     }
-    
+
     private var chatBottomBar: some View {
         HStack(spacing: 16) {
             Image(systemName: "photo.on.rectangle")
@@ -50,16 +55,19 @@ struct ChatLogView: View {
                 .foregroundColor(Color(.darkGray))
             ZStack {
                 DescriptionPlaceholder()
-                TextEditor(text: $chatText)
-                    .opacity(chatText.isEmpty ? 0.5 : 1)
+                TextEditor(text: $vm.chatText)
+                    .opacity(vm.chatText.isEmpty ? 0.5 : 1)
             }
             .frame(height: 40)
-            
+
             Button {
-                
+                vm.handleSend()
+                vm.chatText = ""
             } label: {
                 Text("Send")
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
+                    .cornerRadius(30)
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
@@ -84,10 +92,6 @@ private struct DescriptionPlaceholder: View {
     }
 }
 
-struct ChatLogView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ChatLogView(chatUser: .init(data: ["uid": "R8ZrxIT4uRZMVZeWwWeQWPI5zUE3", "email": "waterfall1@gmail.com"]))
-        }
-    }
+#Preview{
+    MainMessagesView()
 }
