@@ -43,25 +43,20 @@ class ChatLogViewModel: ObservableObject {
             .collection("messages")
             .document(fromId)
             .collection(toId)
+            .order(by: "timestamp")
             .addSnapshotListener { QuerySnapshot, error in
                 if let error = error {
                     self.errorMessage = "Error fetching new msg\(error)"
                     print(error)
                     return
                 }
-                
+
                 QuerySnapshot?.documentChanges.forEach({ change in
-                    if change.type == .added{
+                    if change.type == .added {
                         let data = change.document.data()
                         self.chatMessages.append(.init(documentID: change.document.documentID, data: data))
                     }
                 })
-
-//                QuerySnapshot?.documents.forEach({ queryDocumentSnapshot in
-//                    let data = queryDocumentSnapshot.data()
-//                    let docID = queryDocumentSnapshot.documentID
-//                    self.chatMessages.append(.init(documentID: docID, data: data))
-//                })
             }
     }
 

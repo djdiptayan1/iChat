@@ -29,18 +29,36 @@ struct ChatLogView: View {
     private var messagesView: some View {
         ScrollView {
             ForEach(vm.chatMessages){ message in
-                HStack {
-                    Spacer()
-                    HStack {
-                        Text(message.text)
-                            .foregroundColor(.white)
+                VStack {
+                    if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
+                        HStack {
+                            Spacer()
+                            HStack {
+                                Text(message.text)
+                                    .foregroundColor(.white)
+                                    .id(message.id)
+                            }
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                        }
+                    } else {
+                        HStack {
+                            HStack {
+                                Text(message.text)
+                                    .foregroundColor(.white)
+                                    .id(message.id)
+                            }
+                            .padding()
+                            .background(Color.green)
+                            .cornerRadius(8)
+                            Spacer()
+                        }
                     }
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
+
             }
             HStack { Spacer() }
                 .frame(height: 50)
