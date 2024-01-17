@@ -4,10 +4,18 @@ import SwiftUI
 
 import Firebase
 
-struct FirebaseConstants{
+struct FirebaseConstants {
     static let fromId = "fromId"
     static let toId = "toId"
     static let text = "text"
+    static let timestamp = "timestamp"
+    static let photoURL = "photoURL"
+    static let email = "email"
+    static let displayName = "displayName"
+    static let uid = "uid"
+    static let users = "users"
+    static let recentMessages = "recent_messages"
+    static let messages = "messages"
 }
 
 class FirebaseManager: NSObject {
@@ -40,29 +48,65 @@ class GetUserData: ObservableObject {
             self.isLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
         }
         fetchCurrentUser()
+
+        fetchRecentMessages()
+    }
+
+    @Published var recentMessages = [RecentMessage]()
+
+    private var firestoreListener: ListenerRegistration?
+
+    private func fetchRecentMessages() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recentMessages)
+            .document(uid)
+            .collection(FirebaseConstants.messages)
+            .order(by: FirebaseConstants.timestamp)
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to listen for recent msgs \(error)"
+                    print(error)
+                    return
+                }
+                querySnapshot?.documentChanges.forEach({ change in
+                    let docId = change.document.documentID
+
+                    if let index = self.recentMessages.firstIndex(where: { rm in
+                        rm.id == docId
+                    }) {
+                        self.recentMessages.remove(at: index)
+                    }
+
+                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+                })
+            }
     }
 
     func fetchCurrentUser() {
         guard let email = FirebaseManager.shared.auth.currentUser?.email else {
-            self.errorMessage = "Could not find firebase email"
+            errorMessage = "Could not find firebase email"
             return
         }
-        
-        FirebaseManager.shared.firestore.collection("users").document(email).getDocument { snapshot, error in
-            if let error = error {
-                self.errorMessage = "Failed to fetch current user: \(error)"
-                print("Failed to fetch current user:", error)
-                return
+
+        FirebaseManager.shared.firestore
+            .collection("users")
+            .document(email)
+            .getDocument { snapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to fetch current user: \(error)"
+                    print("Failed to fetch current user:", error)
+                    return
+                }
+
+                guard let data = snapshot?.data() else {
+                    self.errorMessage = "No data found"
+                    return
+                }
+
+                self.chatUser = .init(data: data)
             }
-            
-            guard let data = snapshot?.data() else {
-                self.errorMessage = "No data found"
-                return
-                
-            }
-            
-            self.chatUser = .init(data: data)
-        }
     }
 
     func handleSignOut() {
@@ -71,7 +115,7 @@ class GetUserData: ObservableObject {
     }
 }
 
-struct FirebaseUserManager {
+ struct FirebaseUserManager {
     static func saveImageToFirebaseStorage(uid: String, image: UIImage, completion: @escaping (URL?, String?) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             completion(nil, "Failed to convert image to data.")
@@ -97,9 +141,11 @@ struct FirebaseUserManager {
         }
     }
 
-    static func storeUserInfo(email: String, uid: String, profilePicURL: URL, completion: @escaping (String?) -> Void) {
-        let userData = ["email": email, "uid": uid, "ProfilePic": profilePicURL.absoluteString]
-        FirebaseManager.shared.firestore.collection("users").document(uid).setData(userData) { error in
+    static func storeUserInfo(name: String, email: String, uid: String, ProfilePic: URL, completion: @escaping (String?) -> Void) {
+        let userData = ["displayName": name, "email": email, "uid": uid, "photoURL": ProfilePic.absoluteString]
+        FirebaseManager.shared.firestore
+            .collection("users")
+            .document(uid).setData(userData) { error in
             if let error = error {
                 completion("Failed to store user info: \(error)")
             } else {
@@ -107,4 +153,4 @@ struct FirebaseUserManager {
             }
         }
     }
-}
+ }

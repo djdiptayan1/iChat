@@ -1,17 +1,18 @@
 import Firebase
 import SDWebImageSwiftUI
 import SwiftUI
+
+
 struct MainMessagesView: View {
     @State var shouldShowNewMessageScreen = false
     @State var chatUser: ChatUser?
     @State var shouldShowLogOutOptions = false
     @State var shouldNavigateToChatLogView = false
-    
+
     @ObservedObject private var vm = GetUserData()
-    
+
     var body: some View {
         NavigationView {
-            
             VStack {
                 Navbar(vm: vm)
                 messagesView
@@ -28,30 +29,35 @@ struct MainMessagesView: View {
 
     private var messagesView: some View {
         ScrollView {
-            ForEach(0 ..< 10, id: \.self) { _ in
+            ForEach(vm.recentMessages) { recentMessage in
                 VStack {
                     NavigationLink {
-                        Text("Destination")
+                        ChatLogView(chatUser: self.chatUser)
                     } label: {
                         HStack(spacing: 16) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 32))
-                                .padding(8)
-                                .overlay(RoundedRectangle(cornerRadius: 44)
-                                    .stroke(Color(.label), lineWidth: 1)
-                                )
+                            WebImage(url: URL(string: recentMessage.ProfilePic))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipped()
+                                .cornerRadius(64)
+                                .overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color.black, lineWidth: 1))
+                                .shadow(radius: 5)
 
                             VStack(alignment: .leading) {
-                                Text("Username")
+                                Text(recentMessage.email)
                                     .font(.system(size: 16, weight: .bold))
-                                Text("Message sent to user")
+                                Text(recentMessage.text)
                                     .font(.system(size: 14))
                                     .foregroundColor(Color(.lightGray))
+                                    .multilineTextAlignment(.leading)
                             }
                             Spacer()
 
-                            Text("22d")
+                            Text(recentMessage.timestamp.description)
                                 .font(.system(size: 14, weight: .semibold))
+                                .foregroundStyle(Color(.label))
                         }
                     }
 

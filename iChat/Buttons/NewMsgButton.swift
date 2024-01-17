@@ -28,7 +28,7 @@ struct NewMessageButton: View {
             CreateNewMsg(didSelectUser: { user in
                 print(user.email)
                 shouldNavigateToChatLogView.toggle()
-                chatUser = user
+                self.chatUser = user
             })
         }
     }

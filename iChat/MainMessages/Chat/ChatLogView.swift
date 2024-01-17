@@ -62,8 +62,6 @@ struct ChatLogView: View {
 
             Button {
                 vm.handleSend()
-                vm.chatText = ""
-                vm.count+=1
             } label: {
                 Text("Send")
                     .fontWeight(.bold)

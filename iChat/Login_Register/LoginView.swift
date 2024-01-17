@@ -51,8 +51,7 @@ struct LoginView: View {
 
     func loginUser() {
         print("Login")
-        FirebaseManager.shared.auth.signIn(withEmail: email, password: password){
-            result, err in
+        FirebaseManager.shared.auth.signIn(withEmail: email, password: password){ result, err in
             if let err = err {
                 print("Error While Login", err)
                 self.errorMessage = "Failed to Login"
