@@ -13,6 +13,13 @@
 		9D3C5EC72B55608900679EC2 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC62B55608900679EC2 /* ChatUser.swift */; };
 		9D3C5ECA2B55AC2E00679EC2 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */; };
 		9D3C5ECC2B55ADAC00679EC2 /* NewMsgButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3C5ECB2B55ADAC00679EC2 /* NewMsgButton.swift */; };
+		9D5BBE052BD84719002DBF26 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE042BD84719002DBF26 /* Auth */; };
+		9D5BBE072BD84719002DBF26 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE062BD84719002DBF26 /* Functions */; };
+		9D5BBE092BD84719002DBF26 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE082BD84719002DBF26 /* PostgREST */; };
+		9D5BBE0B2BD84719002DBF26 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE0A2BD84719002DBF26 /* Realtime */; };
+		9D5BBE0D2BD84719002DBF26 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE0C2BD84719002DBF26 /* Storage */; };
+		9D5BBE0F2BD848BD002DBF26 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BBE0E2BD848BD002DBF26 /* SupabaseManager.swift */; };
+		9D5BBE112BD84B0C002DBF26 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9D5BBE102BD84B0C002DBF26 /* Supabase */; };
 		9DADA7962B545F0600F3FB17 /* iChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7952B545F0600F3FB17 /* iChatApp.swift */; };
 		9DADA7982B545F0600F3FB17 /* Welcomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7972B545F0600F3FB17 /* Welcomepage.swift */; };
 		9DADA79A2B545F0700F3FB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DADA7992B545F0700F3FB17 /* Assets.xcassets */; };
@@ -24,6 +31,7 @@
 		9DADA7C32B54639100F3FB17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7C22B54639100F3FB17 /* LoginView.swift */; };
 		9DADA7C52B54740700F3FB17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DADA7C42B54740700F3FB17 /* GoogleService-Info.plist */; };
 		9DADA7CC2B54829100F3FB17 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DADA7CB2B54829100F3FB17 /* ImagePicker.swift */; };
+		9DB5EFF22BDCF17500B0758D /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB5EFF12BDCF17500B0758D /* ProfileInputView.swift */; };
 		9DC06EFD2B54F65F00EB6352 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC06EFC2B54F65F00EB6352 /* FirebaseAuth */; };
 		9DC06EFF2B54F65F00EB6352 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC06EFE2B54F65F00EB6352 /* FirebaseDatabase */; };
 		9DC06F012B54F65F00EB6352 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC06F002B54F65F00EB6352 /* FirebaseFirestore */; };
@@ -58,6 +66,7 @@
 		9D3C5EC62B55608900679EC2 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		9D3C5ECB2B55ADAC00679EC2 /* NewMsgButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMsgButton.swift; sourceTree = "<group>"; };
+		9D5BBE0E2BD848BD002DBF26 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		9DADA7922B545F0600F3FB17 /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DADA7952B545F0600F3FB17 /* iChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iChatApp.swift; sourceTree = "<group>"; };
 		9DADA7972B545F0600F3FB17 /* Welcomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcomepage.swift; sourceTree = "<group>"; };
@@ -73,6 +82,7 @@
 		9DADA7C22B54639100F3FB17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9DADA7C42B54740700F3FB17 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9DADA7CB2B54829100F3FB17 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		9DB5EFF12BDCF17500B0758D /* ProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		9DC06F042B54FE1400EB6352 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9DC06F072B55050500EB6352 /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
 		9DC06F092B55140500EB6352 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
@@ -83,10 +93,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5BBE112BD84B0C002DBF26 /* Supabase in Frameworks */,
+				9D5BBE0B2BD84719002DBF26 /* Realtime in Frameworks */,
 				9DC06F0D2B552B1700EB6352 /* SDWebImageSwiftUI in Frameworks */,
 				9DC06EFF2B54F65F00EB6352 /* FirebaseDatabase in Frameworks */,
+				9D5BBE052BD84719002DBF26 /* Auth in Frameworks */,
 				9DC06F032B54F65F00EB6352 /* FirebaseStorage in Frameworks */,
+				9D5BBE092BD84719002DBF26 /* PostgREST in Frameworks */,
+				9D5BBE072BD84719002DBF26 /* Functions in Frameworks */,
 				9DC06EFD2B54F65F00EB6352 /* FirebaseAuth in Frameworks */,
+				9D5BBE0D2BD84719002DBF26 /* Storage in Frameworks */,
 				9DC06F012B54F65F00EB6352 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				9D3C5EC92B55AC2E00679EC2 /* ChatLogView.swift */,
+				9DB5EFF12BDCF17500B0758D /* ProfileInputView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -132,6 +149,7 @@
 				9DC06F042B54FE1400EB6352 /* FirebaseManager.swift */,
 				9D3C5EC62B55608900679EC2 /* ChatUser.swift */,
 				9D3457392B580419003D7F16 /* RecentMessage.swift */,
+				9D5BBE0E2BD848BD002DBF26 /* SupabaseManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -240,6 +258,12 @@
 				9DC06F002B54F65F00EB6352 /* FirebaseFirestore */,
 				9DC06F022B54F65F00EB6352 /* FirebaseStorage */,
 				9DC06F0C2B552B1700EB6352 /* SDWebImageSwiftUI */,
+				9D5BBE042BD84719002DBF26 /* Auth */,
+				9D5BBE062BD84719002DBF26 /* Functions */,
+				9D5BBE082BD84719002DBF26 /* PostgREST */,
+				9D5BBE0A2BD84719002DBF26 /* Realtime */,
+				9D5BBE0C2BD84719002DBF26 /* Storage */,
+				9D5BBE102BD84B0C002DBF26 /* Supabase */,
 			);
 			productName = iChat;
 			productReference = 9DADA7922B545F0600F3FB17 /* iChat.app */;
@@ -316,6 +340,7 @@
 			packageReferences = (
 				9DC06EFB2B54F65F00EB6352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9DC06F0B2B552B1700EB6352 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = 9DADA7932B545F0600F3FB17 /* Products */;
 			projectDirPath = "";
@@ -360,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5BBE0F2BD848BD002DBF26 /* SupabaseManager.swift in Sources */,
 				9D34573A2B580419003D7F16 /* RecentMessage.swift in Sources */,
 				9DADA7C12B54634B00F3FB17 /* RegisterView.swift in Sources */,
 				9DC06F0A2B55140500EB6352 /* NavBar.swift in Sources */,
@@ -372,6 +398,7 @@
 				9DADA7CC2B54829100F3FB17 /* ImagePicker.swift in Sources */,
 				9DADA7C32B54639100F3FB17 /* LoginView.swift in Sources */,
 				9D3457382B570ECF003D7F16 /* ChatLogViewModel.swift in Sources */,
+				9DB5EFF22BDCF17500B0758D /* ProfileInputView.swift in Sources */,
 				9DC06F052B54FE1400EB6352 /* FirebaseManager.swift in Sources */,
 				9DADA7962B545F0600F3FB17 /* iChatApp.swift in Sources */,
 			);
@@ -736,6 +763,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 		9DC06EFB2B54F65F00EB6352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -755,6 +790,36 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9D5BBE042BD84719002DBF26 /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		9D5BBE062BD84719002DBF26 /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		9D5BBE082BD84719002DBF26 /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		9D5BBE0A2BD84719002DBF26 /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		9D5BBE0C2BD84719002DBF26 /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		9D5BBE102BD84B0C002DBF26 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D5BBE032BD84719002DBF26 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
 		9DC06EFC2B54F65F00EB6352 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9DC06EFB2B54F65F00EB6352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

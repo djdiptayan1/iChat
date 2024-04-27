@@ -1,11 +1,14 @@
 // CustomNavBarView.swift
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct Navbar: View {
     @ObservedObject private var vm: GetUserData
-    
+    @State var chatUser: ChatUser?
+    @State private var date = Date()
+    @State private var showProfileInput = false // State variable to control navigation to profile input screen
+
     init(vm: GetUserData) {
         self.vm = vm
     }
@@ -19,7 +22,7 @@ struct Navbar: View {
                 .clipped()
                 .cornerRadius(50)
                 .overlay(RoundedRectangle(cornerRadius: 44)
-                            .stroke(Color(.label), lineWidth: 1)
+                    .stroke(Color(.label), lineWidth: 1)
                 )
                 .shadow(radius: 5)
 
@@ -51,12 +54,23 @@ struct Navbar: View {
         .padding()
         .actionSheet(isPresented: $vm.shouldShowLogOutOptions) {
             ActionSheet(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
+                .default(Text("Profile"), action: {
+                    // Navigate to profile input screen
+                    showProfileInput = true
+                }),
                 .destructive(Text("Sign Out"), action: {
                     print("handle sign out")
                     vm.handleSignOut()
+                    Task{
+                        await logToSupabase()
+                    }
                 }),
-                .cancel()
+                .cancel(),
             ])
+        }
+        .sheet(isPresented: $showProfileInput) {
+            // Profile input view as a sheet
+            ProfileInputView()
         }
         .fullScreenCover(isPresented: $vm.isLoggedOut, onDismiss: nil) {
             Welcomepage(didCompleteLogin: {
@@ -65,4 +79,23 @@ struct Navbar: View {
             })
         }
     }
+    func logToSupabase() async {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // ISO 8601 format
+            let currentDateString = dateFormatter.string(from: Date()) // Format the current date
+
+            do {
+                try await supabase.database
+                    .from("authentication_log")
+                    .insert([
+                        "user_id": FirebaseManager.shared.auth.currentUser?.uid,
+                        "timestamp": currentDateString,
+                        "log_type": "logout",
+                    ])
+                    .execute()
+                print("INSERTED INTO SUPABSE DB")
+            } catch {
+                print("Failed to insert into Supabase DB: \(error)")
+            }
+        }
 }

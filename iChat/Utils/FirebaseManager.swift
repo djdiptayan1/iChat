@@ -53,6 +53,7 @@ class GetUserData: ObservableObject {
     }
 
     @Published var recentMessages = [RecentMessage]()
+    @State private var date = Date()
 
     private var firestoreListener: ListenerRegistration?
 
@@ -109,9 +110,11 @@ class GetUserData: ObservableObject {
             }
     }
 
-    func handleSignOut() {
-        isLoggedOut.toggle()
-        try? FirebaseManager.shared.auth.signOut()
+    func handleSignOut(){
+        do{
+            isLoggedOut.toggle()
+            try? FirebaseManager.shared.auth.signOut()
+        }
     }
 }
 
