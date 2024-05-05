@@ -60,13 +60,17 @@ struct ChatLogView: View {
             }
             .frame(height: 40)
 
-            Button {
-                vm.handleSend()
-            } label: {
+            Button(action: {
+                Task {
+                    do {
+                        vm.handleSend()
+                        try await supa_msg()
+                    } catch {
+                        print("Failed to fetch user: \(error)")
+                    }
+                }
+            }) {
                 Text("Send")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
@@ -75,6 +79,26 @@ struct ChatLogView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
+    }
+    func supa_msg() async throws{
+        do {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // ISO 8601 format
+            let currentDateString = dateFormatter.string(from: Date()) // Format the current date
+
+            try await supabase.database
+                .from("message")
+                .insert([
+                    "sender_time": currentDateString,
+                    "receiver_time": currentDateString,
+                    "message_size": String(vm.chatText.count), // Convert Int to String
+                    "timestamp": currentDateString
+                ])
+                .execute()
+            print("INSERTED INTO SUPABSE DB")
+        } catch {
+            print("Failed to fetch user: \(error)")
+        }
     }
 }
 
